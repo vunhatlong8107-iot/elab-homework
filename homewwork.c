@@ -1,55 +1,46 @@
 #include<stdio.h>
 #include<math.h>
+#include<stdbool.h>
 
-//DISPLAY MODE
+//AUTO DRIVING
 
 int main(){
-    int mode, battery;
-    do{
-        printf("Please enter your battery ");
-        scanf("%d", &battery);
-        fflush(stdin);
-    }while((battery > 100) || (battery < 0) );
-    printf("**************************\n");
-    printf("0. Standby\n");
-    printf("1. Text\n");
-    printf("2. Video\n");
-    printf("3. Gaming\n");
-    printf("Nhap mode ban muon chon\n");
-    printf("4.Power Saving\n");
-    printf("5. High Performance\n");
-    printf("**************************\n");
-    scanf("%d", &mode);
-    switch (mode){
-        case 0:
-            printf("Standby");
-            break;
-        case 1:
-            printf("Text");
-            break;
-        case 2:
-            printf("Video");
-            break;
-        case 3:
-            printf("Game");
-            break;
-        case 4:
-            if(battery > 80){
-                printf("High Battery - Don't need to save");
-            }else{
-            printf("Power Saving");}
-            break;
-        case 5:
-            if(battery < 30 && battery > 0){
-                printf("Can't enter high Performance - Low Battery");}
-            else{
-                printf("High Performance");
+    bool obstacle;
+    int speed, battery, temp;
+    printf("Does have any obstacles (1) True / (0) False ? ");
+    scanf("%d", &temp);
+    fflush(stdin);
+    printf("*********************\n");
+    printf("Enter your speed ");
+    scanf("%d", &speed);
+    fflush(stdin);
+    printf("*********************\n");
+    printf("Please eneter your battery ");
+    scanf("%d", &battery);
+
+    obstacle = temp;
+
+    if(obstacle){
+        if(speed > 20){
+            printf("Phanh gap ");
+        }else{
+            printf("Vanh hanh binh thuong");
+        }
+    }else{
+        if(speed >= 120){
+            printf("Nguy hiem - Qua toc do");
+        }else if( speed > 0 && speed < 120){
+            if(battery < 5){
+                printf("Dung xe - Pin can");
             }
-            break;
-        default:
-            printf("Che do khong hop le");
-            break;
-        
+            else if(battery < 15){
+                if(speed > 50){
+                    printf("Giam toc do do pin yeu");
+                }
+            }
+        }
+        printf("Vanh hanh binh thuong");
     }
+
     return 0;
 }
